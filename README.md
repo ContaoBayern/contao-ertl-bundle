@@ -14,8 +14,8 @@ In der Datei `config/parameters.yml` die Parameter ergänzen, die dasBundle ben�
 ### Fehlerseiten anlegen 
 
 Bei einem gescheiterten Loginversuch mit einem ungültigen Token wird auf eine
-Fehlerseite weitergeleitet. Dafür muss eine `404` "not found" (bzw. `401` "not authenticated")
-Seite im Seitenbaum existieren.
+Fehlerseite weitergeleitet. Dafür sollten `401` "not authenticated",
+`403` "access denied" und `404` "not found" Seiten im Seitenbaum existieren.
 
 
 ### Formular
