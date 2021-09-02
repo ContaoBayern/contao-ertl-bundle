@@ -41,6 +41,12 @@ weitergeleitet. Tip: Soll auf die Seite weitergeleitet werden, auf der sich das 
 kann der Insert Tag `{{page::id}}` verwendet werden. 
 
 
+### Features
+
+* Beim Löschen eines Members werden die zugehörigen `tl_member_login_token`-Records gelöscht
+
+
+## TODOs
 
 ### Parameter in config/parameters.yml ergänzen:
 
@@ -54,19 +60,13 @@ parameters:
     database_name: ...
     secret: ...
     # Parameter für das Bundle (Beispiele -- noch nicht implementiert)
-    ertl_ASSIGN_GROUPS: [1,2,3] --> TODO: multidomain
+    ertl_ASSIGN_GROUPS: [1,2,3] --> TODO: multidomain und "nicht gesetzt berücksichtigen"
 ```
 
 
-### Features
-
-* Beim Löschen eines Members werden die zugehörigen `tl_member_login_token`-Records gelöscht
-
 ## Cron Jobs
-
 
 * `tl_member` und `tl_member_token` "purgen"
 
 
-## TODO (Roadmap)
 
