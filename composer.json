@@ -1,0 +1,34 @@
+{
+  "name": "contaobayern/contao-ertl-bundle",
+  "description": "email registration + token login for Contao CMS",
+  "type": "contao-bundle",
+  "keywords": ["contao", "email", "registration", "token", "member", "login"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Fieger",
+      "homepage": "https://github.com/fiedsch"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/contaobayern/contao-ertl-bundle/issues",
+    "source": "https://github.com/contaobayern/contao-ertl-bundle"
+  },
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "contao/core-bundle": "^4.9",
+    "terminal42/notification_center": "^1.5",
+    "ramsey/uuid": "^3.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contaobayern\\ErtlBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Contaobayern\\ErtlBundle\\ContaoManager\\Plugin",
+    "branch-alias": {
+      "dev-main": "1.0.x-dev"
+    }
+  }
+}

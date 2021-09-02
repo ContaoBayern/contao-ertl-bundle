@@ -1,0 +1,38 @@
+services:
+
+  _defaults:
+    autowire: true
+    autoconfigure: false
+    public: false
+
+  contaobayern.ertl.helper.process_from_data_listener:
+    class: Contaobayern\ErtlBundle\EventListener\ProcessFormDataListener
+    public: true
+    tags:
+      - { name: contao.hook, hook: processFormData, method: onProcessFormData, priority: 0 }
+
+  contaobayern.ertl.helper.validate_from_field_listener:
+    class: Contaobayern\ErtlBundle\EventListener\ValidateFormFieldListener
+    public: true
+    arguments:
+      - '@database_connection'
+    tags:
+      - { name: contao.hook, hook: validateFormField, method: onValidateFormField, priority: 0 }
+
+  contaobayern.ertl.helper.member_login_manager:
+    class: Contaobayern\ErtlBundle\Helper\MemberLoginManager
+    public: true
+    arguments:
+      - '@security.encoder_factory'
+
+  contaobayern.ertl.controller.token_login:
+    public: true
+    class: Contaobayern\ErtlBundle\Controller\TokenLoginController
+    arguments:
+      - '@contao.security.frontend_user_provider'
+      - '@security.token_storage'
+      - '@event_dispatcher'
+      - '@contao.security.user_checker'
+      - '@contao.security.authentication_success_handler'
+      - '@contao.security.token_checker'
+      - '@logger'

@@ -1,0 +1,11 @@
+contaobayern.ertl.token_login:
+    path: /_login/{token}/{redirecttopagewithid}
+    methods: GET
+    controller: contaobayern.ertl.controller.token_login::loginAction
+    requirements:
+      token: '[-a-zA-z0-9]+'
+      redirecttopagewithid: '\d+'
+    defaults:
+      redirecttopagewithid: 0
+      _scope: frontend
+      _token_check: false
