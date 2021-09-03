@@ -28,7 +28,7 @@ class ProcessFormDataListener
 
         /** @var MemberLoginManager $manager */
         $manager = System::getContainer()->get('contaobayern.ertl.helper.member_login_manager');
-        $member = $manager->createMemberIfNotExists($submittedData);
+        $member = $manager->createMemberIfNotExists($submittedData, Environment::get('host'));
         if ($member->disable) {
             // Member already existed but was deactivated => special error page or rather special notification
             // TODO Notification konfigurieren etc.

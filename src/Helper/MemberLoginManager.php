@@ -28,7 +28,7 @@ class MemberLoginManager
         $this->encoderFactory = $encoderFactory;
     }
 
-    public function createMemberIfNotExists(array $data): MemberModel
+    public function createMemberIfNotExists(array $data, string $domain): MemberModel
     {
         $member = MemberModel::findByEmail($data['email']);
 
@@ -43,7 +43,13 @@ class MemberLoginManager
             $member->password = $hash;
             $member->dateAdded = time();
 
-            $member->groups = [1, 2]; // TODO: konfigurierbar machen (inkl. "pro Domain)
+            $groups = [];
+            $container = System::getContainer();
+            $parameterName = sprintf('ertl_assign_groups.%s', $domain);
+            if ($container->hasParameter($parameterName)) {
+                $groups = $container->getParameter($parameterName);
+            }
+            $member->groups = $groups;
 
             // 'email' is a required form field (@see ProcessFormDataListener::FORM_REQUIRED_FIELDS)
             $member->email = $data[ProcessFormDataListener::FORM_FIELD_EMAIL];
