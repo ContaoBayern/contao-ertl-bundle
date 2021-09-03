@@ -22,7 +22,7 @@ $GLOBALS['TL_DCA']['tl_member_token'] = [
         'sorting'           => [
             'mode'        => 2, // records are sorted by a switchable field
             'flag'        => 1, // sort by initial letter ascending
-            'fields'      => ['token', 'validuntil', 'domain'],
+            'fields'      => ['token', 'tstamp', 'validuntil', 'domain'],
             'panelLayout' => 'sort,filter;search,limit',
         ],
         'label'             => [
@@ -66,7 +66,9 @@ $GLOBALS['TL_DCA']['tl_member_token'] = [
             'sql' => 'int(10) unsigned NOT NULL auto_increment',
         ],
         'tstamp'     => [
-            'sql' => "int(10) unsigned NOT NULL default '0'",
+            'sorting' => true,
+            'flag'    => 5, // sort by day ascending
+            'sql'     => "int(10) unsigned NOT NULL default '0'",
         ],
         'token'      => [
             'inputType' => 'text',
@@ -104,13 +106,13 @@ $GLOBALS['TL_DCA']['tl_member_token'] = [
             'inputType' => 'text',
             'eval'      => ['mandatory' => true, 'tl_class' => 'w50 wizard', 'rgxp' => 'datim', 'datepicker' => true],
 
-            'search'    => false,
-            'filter'    => false,
-            'sorting'   => true,
-            'flag'      => 5, // sort by day ascending
-            'exclude'   => true,
-            'sql'       => "int(10) unsigned NOT NULL default '0'",
+            'search'  => false,
+            'filter'  => false,
+            'sorting' => true,
+            'flag'    => 5, // sort by day ascending
+            'exclude' => true,
+            'sql'     => "int(10) unsigned NOT NULL default '0'",
         ],
-    ]
+    ],
 
 ];
