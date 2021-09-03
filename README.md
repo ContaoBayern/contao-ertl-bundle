@@ -6,9 +6,23 @@ E-Mail Registration + Token Login
 ## Anforderungen nach Installation des Bundles
 
 
-### Parameter
+### Parameter in config/parameters.yml ergänzen
 
-In der Datei `config/parameters.yml` die Parameter ergänzen, die dasBundle benötigt (s.u.).
+In der Datei `config/parameters.yml` die Parameter ergänzen, die dasBundle benötigt
+
+```
+parameters:
+    # Parameter aus der Contao Installation
+    database_host: ...
+    database_port: ...
+    database_user: ...
+    database_password: ...
+    database_name: ...
+    secret: ...
+    # Parameter für das Bundle (Beispiele)
+    ertl_assign_groups.example.com: [1,2,3]
+    ertl_assign_groups.example.org: [1,4]
+```
 
 
 ### Fehlerseiten anlegen 
@@ -44,29 +58,14 @@ kann der Insert Tag `{{page::id}}` verwendet werden.
 ### Features
 
 * Beim Löschen eines Members werden die zugehörigen `tl_member_login_token`-Records gelöscht
+* Wird ein Member im Backend deaktiviert, so ist der Login unterbunden (bei Verwendung des 
+  zugehörigen Loginlinks erhalten User einen Fehler `403`)
 
 
 ## TODOs
 
-### Parameter in config/parameters.yml ergänzen:
-
-```
-parameters:
-    # Parameter aus der Contao Installation
-    database_host: ...
-    database_port: ...
-    database_user: ...
-    database_password: ...
-    database_name: ...
-    secret: ...
-    # Parameter für das Bundle (Beispiele -- noch nicht implementiert)
-    ertl_ASSIGN_GROUPS: [1,2,3] --> TODO: multidomain und "nicht gesetzt berücksichtigen"
-```
-
 
 ## Cron Jobs
 
-* `tl_member` und `tl_member_token` "purgen"
-
-
+* `tl_member` und `tl_member_token` "purgen" via noch zu erstellender `contao-console` Commands
 
