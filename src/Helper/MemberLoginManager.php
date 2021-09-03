@@ -71,7 +71,11 @@ class MemberLoginManager
                     }
                 }
                 // we only handle scalar fields
-                if ('text' === $GLOBALS['TL_DCA']['tl_member']['fields'][$key]['inputType']) {
+                if (in_array($GLOBALS['TL_DCA']['tl_member']['fields'][$key]['inputType'], ['text', 'select'])) {
+                    // Do not let the user fiddle with the tl_member fileds we want to control -- e.g. by submitting a field named 'groups'
+                    if (in_array($key, ['groups', 'tstamp', 'password', 'dateAdded'])) {
+                        continue;
+                    }
                     $member->$key = $data[$key];
                 }
             }
