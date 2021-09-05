@@ -43,14 +43,6 @@ class MemberLoginManager
             $member->password = $hash;
             $member->dateAdded = time();
 
-            $groups = [];
-            $container = System::getContainer();
-            $parameterName = sprintf('ertl_assign_groups.%s', $domain);
-            if ($container->hasParameter($parameterName)) {
-                $groups = $container->getParameter($parameterName);
-            }
-            $member->groups = $groups;
-
             // 'email' is a required form field (@see ProcessFormDataListener::FORM_REQUIRED_FIELDS)
             $member->email = $data[ProcessFormDataListener::FORM_FIELD_EMAIL];
             $member->username = $data[ProcessFormDataListener::FORM_FIELD_EMAIL];
@@ -82,6 +74,17 @@ class MemberLoginManager
 
             $member->save();
         }
+
+        // Manage the groups for the required domain
+        $memberGroups = StringUtil::deserialize($member->groups, true);
+        $container = System::getContainer();
+        $parameterName = sprintf('ertl_assign_groups.%s', $domain);
+        if ($container->hasParameter($parameterName)) {
+            $groups = $container->getParameter($parameterName);
+        }
+        $member->groups = array_unique(array_merge($memberGroups, $groups));
+
+        $member->save();
 
         return $member;
     }
