@@ -7,6 +7,7 @@ use Contao\Idna;
 use Contao\Environment;
 use Contao\FrontendUser;
 use Contao\MemberModel;
+use Contao\StringUtil;
 use Contao\System;
 use Contaobayern\ErtlBundle\EventListener\ProcessFormDataListener;
 use Contaobayern\ErtlBundle\Model\MemberTokenModel;
@@ -71,7 +72,6 @@ class MemberLoginManager
                     $member->$key = $data[$key];
                 }
             }
-
             $member->save();
         }
 
@@ -89,24 +89,27 @@ class MemberLoginManager
         return $member;
     }
 
-    public function createTokenForMember(array $data, string $domain): ?string
+    public function createTokenForMemberIfNotExists(array $data, string $domain): ?string
     {
+        if (!isset($data['email'])) {
+            return null;
+        }
         $member = MemberModel::findByEmail($data['email']);
         if (null === $member) {
             return null;
         }
 
-        $token = MemberTokenModel::findByMemberId($member->id);
+        $token = MemberTokenModel::findBy(['pid=?', 'domain=?'], [$member->id, $domain]);
         if (null === $token) {
             $token = new MemberTokenModel();
             $token->pid = $member->id;
             $token->token = Uuid::uuid4()->getHex();
             $token->domain = $domain;
             $token->validuntil = time() + 7 * 24 * 60 * 60; // TODO: Dauer konfigurierbar machen
-        }
-        $token->tstamp = time();
+            $token->tstamp = time();
 
-        $token->save();
+            $token->save();
+        }
 
         return $token->token;
     }

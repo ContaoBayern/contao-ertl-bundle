@@ -35,7 +35,7 @@ class ProcessFormDataListener
             $manager->sendNotifications('ertl_formpost_member_error', $submittedData);
             return;
         }
-        $token = $manager->createTokenForMember($submittedData, Environment::get('host'));
+        $token = $manager->createTokenForMemberIfNotExists($submittedData, Environment::get('host'));
         $manager->sendNotifications('ertl_formpost', $submittedData, $token);
     }
 
