@@ -1,5 +1,7 @@
 <?php
 
+// TODO : relations belongsTo tl_member entry
+
 $GLOBALS['TL_DCA']['tl_member_token'] = [
     'config' => [
         'dataContainer'    => 'Table',
