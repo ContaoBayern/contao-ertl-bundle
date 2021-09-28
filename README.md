@@ -55,6 +55,24 @@ weitergeleitet. Tip: Soll auf die Seite weitergeleitet werden, auf der sich das 
 kann der Insert Tag `{{page::id}}` verwendet werden. 
 
 
+### Notifications
+
+Damit User einen Loginlink zugeschickt bekommen, muss im Notification Center eine Notification vom Typ 
+"ER+TL Registrierung" angelegt werden. In dieser kann über Simple Tokens auf die Formulardaten zugegriffen 
+werden (insbes. `##form_email##` für den Empfänger der E-Mail). 
+Der Loginlink steht über das Simple Token `##loginlink##` zur Verfügung. 
+
+Ein Beispiel für den Text der E-Mail:
+
+```
+Hallo ##form_firstname## ##form_lastname##
+
+Dein Loginlink für ##domain## lautet 
+
+##loginlink##
+```
+
+
 ### Features
 
 * Beim Löschen eines Members werden die zugehörigen `tl_member_login_token`-Records gelöscht
