@@ -33,8 +33,7 @@ $GLOBALS['NOTIFICATION_CENTER']['NOTIFICATION_TYPE']['ertl'] = [
 
 // TODO notification type ertl_formpost_member_error
 
-array_insert($GLOBALS['BE_MOD']['accounts'], 1, [
-    'ertl.membertoken' => [
-        'tables' => ['tl_member_token'],
-    ]
-]);
+$GLOBALS['BE_MOD']['accounts']['ertl.membertoken'] = ['tables' => ['tl_member_token']];
+
+
+
