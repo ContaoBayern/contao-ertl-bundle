@@ -14,7 +14,6 @@ use Contao\PageModel;
 use Contaobayern\ErtlBundle\Model\MemberTokenModel;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -42,7 +41,6 @@ class TokenLoginController extends AbstractController
     private AuthenticationSuccessHandlerInterface $authenticationSuccessHandler;
     private TokenChecker $tokenChecker;
     private LoggerInterface $logger;
-    private RequestStack $requestStack;
 
     public function __construct(
         UserProviderInterface                 $userProvider,
@@ -51,8 +49,7 @@ class TokenLoginController extends AbstractController
         UserCheckerInterface                  $userChecker,
         AuthenticationSuccessHandlerInterface $authenticationSuccessHandler,
         TokenChecker $tokenChecker,
-        LoggerInterface $logger,
-        RequestStack $requestStack
+        LoggerInterface $logger
     ) {
         $this->userProvider = $userProvider;
         $this->tokenStorage = $tokenStorage;
@@ -61,7 +58,6 @@ class TokenLoginController extends AbstractController
         $this->authenticationSuccessHandler = $authenticationSuccessHandler;
         $this->tokenChecker = $tokenChecker;
         $this->logger = $logger;
-        $this->requestStack = $requestStack;
     }
 
 
