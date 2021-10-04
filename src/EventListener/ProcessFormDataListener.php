@@ -2,6 +2,7 @@
 
 namespace Contaobayern\ErtlBundle\EventListener;
 
+use Contao\CoreBundle\Exception\RedirectResponseException;
 use Contao\Environment;
 use Contao\Form;
 use Contao\System;
@@ -30,9 +31,10 @@ class ProcessFormDataListener
         $manager = System::getContainer()->get('contaobayern.ertl.helper.member_login_manager');
         $member = $manager->createMemberIfNotExists($submittedData, Environment::get('host'));
         if ($member->disable) {
-            // Member already existed but was deactivated => special error page or rather special notification
-            // TODO Notification konfigurieren etc.
+            // Member already existed but was deactivated => send notification
             $manager->sendNotifications('ertl_formpost_member_error', $submittedData);
+            // TODO: or should this rather be an error page redirect (or even both)
+            // throw new RedirectResponseException('fehlerseite.html'); // with a configurable alias of course ;-)
             return;
         }
         $token = $manager->createTokenForMemberIfNotExists($submittedData, Environment::get('host'));
