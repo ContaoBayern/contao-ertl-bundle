@@ -33,7 +33,7 @@ class ProcessFormDataListener
         if ($member->disable) {
             // Member already existed but was deactivated => send notification
             $manager->sendNotifications('ertl_formpost_member_error', $submittedData);
-            // TODO: or should this rather be an error page redirect (or even both)
+            // TODO (?): or should this rather be an error page redirect (or even both)
             // throw new RedirectResponseException('fehlerseite.html'); // with a configurable alias of course ;-)
             return;
         }

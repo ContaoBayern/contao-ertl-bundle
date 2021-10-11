@@ -24,9 +24,17 @@ class MemberLoginManager
     /** @var EncoderFactoryInterface */
     private $encoderFactory;
 
+    private $tokenLifetime;
+
     public function __construct(EncoderFactoryInterface $encoderFactory)
     {
         $this->encoderFactory = $encoderFactory;
+        $container = System::getContainer();
+        $this->tokenLifetime = 7*24*60*60; // 7 Tage
+        if ($container->hasParameter('ertl_token_lifetime')) {
+            $parameter = $container->getParameter('ertl_token_lifetime');
+            $this->tokenLifetime = (int)$parameter;
+        }
     }
 
     public function createMemberIfNotExists(array $data, string $domain): MemberModel
@@ -105,7 +113,7 @@ class MemberLoginManager
             $token->pid = $member->id;
             $token->token = Uuid::uuid4()->getHex();
             $token->domain = $domain;
-            $token->validuntil = time() + 7 * 24 * 60 * 60; // TODO: Dauer konfigurierbar machen
+            $token->validuntil = time() + $this->tokenLifetime;
             $token->tstamp = time();
 
             $token->save();

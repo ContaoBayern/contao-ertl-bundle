@@ -5,7 +5,6 @@ namespace Contaobayern\ErtlBundle\EventListener;
 use Contao\Form;
 use Contao\System;
 use Contao\Widget;
-use Doctrine\DBAL\Connection;
 
 class ValidateFormFieldListener
 {
@@ -14,12 +13,8 @@ class ValidateFormFieldListener
      */
     protected $invalid_domains = [];
 
-    // TODO: use $connection to query (currently hard coded) INVALID_DOMAINS from the database
-    protected Connection $connection;
-
-    public function __construct(Connection $connection)
+    public function __construct()
     {
-        $this->connection = $connection;
         $container = System::getContainer();
         if ($container->hasParameter('ertl_rejected_domains')) {
             $ertl_rejected_domains = $container->getParameter('ertl_rejected_domains');

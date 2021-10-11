@@ -14,8 +14,6 @@ services:
   contaobayern.ertl.helper.validate_from_field_listener:
     class: Contaobayern\ErtlBundle\EventListener\ValidateFormFieldListener
     public: true
-    arguments:
-      - '@database_connection'
     tags:
       - { name: contao.hook, hook: validateFormField, method: onValidateFormField, priority: 0 }
 

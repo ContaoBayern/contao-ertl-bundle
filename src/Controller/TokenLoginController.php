@@ -74,7 +74,7 @@ class TokenLoginController extends AbstractController
 
         // Token expired?
         if ($tokenModel->validuntil < time()) {
-            // TODO (?): Member und MemberToken bearbeiten
+            // Member und MemberToken werden via Contaobayern\ErtlBundle\Cron\PurgeTokens bearbeitet
             $this->show401Page('Abgelaufenes Token');
         }
 
@@ -171,7 +171,7 @@ class TokenLoginController extends AbstractController
     /** @noinspection PhpUnusedParameterInspection */
     protected function show403Page($message): void
     {
-        $handler = new PageError403(); // TODO (?): $objRootPage setzen -- sollte automatisch gehen
+        $handler = new PageError403();
         $handler->generate();
         exit;
     }

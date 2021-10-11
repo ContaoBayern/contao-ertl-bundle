@@ -22,7 +22,10 @@ parameters:
     # Parameter für das Bundle (Beispiele)
     ertl_assign_groups.example.com: [1,2,3]
     ertl_assign_groups.example.org: [1,4]
-    # Optionaler Parameter um E-Mails bestimmter Domains nicht zu akzeptieren
+    # Optionale Parameter: 
+    # Gültigkeitsdauer eines Tokens (im Bsp.: 14 Tage; Default wäre 7 Tage).    
+    ertl_token_lifetime: 1209600
+    # E-Mails bestimmter Domains nicht akzeptieren
     # (es erscheint eine entsprechenden Fehlermeldung im Registrierungsformular) 
     ertl_rejected_domains:
         - t-online.de
