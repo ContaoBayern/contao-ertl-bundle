@@ -31,7 +31,7 @@ class ValidateFormFieldListener
     {
         if ('email' === $widget->name) {
             if ($this->isInvalidDomain($widget->value)) {
-                $widget->addError('Bitte verwenden Sie eine geschäftliche E-Mail-Adresse.'); // TODO aus Sprachvariable
+                $widget->addError($GLOBALS['TL_LANG']['ERR']['invalidEmailDomain']);
             }
         }
 
