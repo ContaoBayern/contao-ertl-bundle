@@ -25,7 +25,7 @@ parameters:
     # Optionale Parameter: 
     # Gültigkeitsdauer eines Tokens (im Bsp.: 14 Tage; Default wäre 7 Tage).    
     ertl_token_lifetime: 1209600
-    # E-Mails bestimmter Domains nicht akzeptieren
+    # E-Mails-Adressen bestimmter Domains nicht akzeptieren
     # (es erscheint eine entsprechenden Fehlermeldung im Registrierungsformular) 
     ertl_rejected_domains:
         - t-online.de
