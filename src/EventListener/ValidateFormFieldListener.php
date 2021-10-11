@@ -3,18 +3,16 @@
 namespace Contaobayern\ErtlBundle\EventListener;
 
 use Contao\Form;
+use Contao\System;
 use Contao\Widget;
 use Doctrine\DBAL\Connection;
 
 class ValidateFormFieldListener
 {
-    // TODO: refactor to have these entries in a database table that can be managed from within the Contao back end
-    const INVALID_DOMAINS = [
-        't-online.de',
-        'gmx.de', 'gmx.com',
-        'google.com',
-        'web.de'
-    ];
+    /**
+     * @var array
+     */
+    protected $invalid_domains = [];
 
     // TODO: use $connection to query (currently hard coded) INVALID_DOMAINS from the database
     protected Connection $connection;
@@ -22,6 +20,13 @@ class ValidateFormFieldListener
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+        $container = System::getContainer();
+        if ($container->hasParameter('ertl_rejected_domains')) {
+            $ertl_rejected_domains = $container->getParameter('ertl_rejected_domains');
+            if (is_array($ertl_rejected_domains)) {
+                $this->invalid_domains = $ertl_rejected_domains;
+            }
+        }
     }
 
     /**
@@ -49,7 +54,7 @@ class ValidateFormFieldListener
 
     protected function isInvalidDomain($email): bool
     {
-        return in_array($this->getDomain($email), self::INVALID_DOMAINS);
+        return in_array($this->getDomain($email), $this->invalid_domains);
     }
 }
 

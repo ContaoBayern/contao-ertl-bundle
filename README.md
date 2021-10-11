@@ -22,6 +22,12 @@ parameters:
     # Parameter für das Bundle (Beispiele)
     ertl_assign_groups.example.com: [1,2,3]
     ertl_assign_groups.example.org: [1,4]
+    # Optionaler Parameter um E-Mails bestimmter Domains nicht zu akzeptieren
+    # (es erscheint eine entsprechenden Fehlermeldung im Registrierungsformular) 
+    ertl_rejected_domains:
+        - t-online.de
+        - web.de
+        - gmail.com
 ```
 
 
