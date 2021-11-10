@@ -8,7 +8,7 @@ E-Mail Registration + Token Login
 
 ### Parameter in config/parameters.yml ergänzen
 
-In der Datei `config/parameters.yml` die Parameter ergänzen, die dasBundle benötigt
+In der Datei `config/parameters.yml` die Parameter ergänzen, die das Bundle benötigt
 
 ```
 parameters:
@@ -36,8 +36,8 @@ parameters:
 
 ### Fehlerseiten anlegen 
 
-Bei einem gescheiterten Loginversuch mit einem ungültigen Token wird auf eine
-Fehlerseite weitergeleitet. Dafür sollten `401` "not authenticated",
+Bei einem gescheiterten Loginversuch mit einem ungültigen Token wird je nach Situation auf eine
+entsprechende Fehlerseite weitergeleitet. Dafür sollten `401` "not authenticated",
 `403` "access denied" und `404` "not found" Seiten im Seitenbaum existieren.
 
 
