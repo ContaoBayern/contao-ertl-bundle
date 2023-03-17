@@ -37,6 +37,10 @@ class ProcessFormDataListener
             // throw new RedirectResponseException('fehlerseite.html'); // with a configurable alias of course ;-)
             return;
         }
+        // TODO: Fallunterscheidungen bei bereits ex. Member: wann soll ein Token erstellt werden
+        // (z.B. für anderen Bereich) und wann nicht.
+        // Insbes. bachten: Member ex. bereits und hat noch ein Token für einen anderen Bereich.
+        // Soll dann das Token für den angegebenen Bereich (ggf. neu) erstellt werden?
         $token = $manager->createTokenForMemberIfNotExists($submittedData, Environment::get('host'));
         $manager->sendNotifications('ertl_formpost', $submittedData, $token);
     }
