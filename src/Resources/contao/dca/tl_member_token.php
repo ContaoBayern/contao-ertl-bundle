@@ -1,8 +1,10 @@
 <?php
 
+use Contao\DC_Table;
+
 $GLOBALS['TL_DCA']['tl_member_token'] = [
     'config' => [
-        'dataContainer'    => 'Table',
+        'dataContainer'    => DC_Table::class,
         // 'closed'           => true,
         // 'notEditable'      => true,
         // 'notCopyable'      => true,
